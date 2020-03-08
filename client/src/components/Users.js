@@ -9,7 +9,7 @@ class Users extends Component {
   }
 
   componentDidMount() {
-    fetch("api/users")
+    fetch("http://localhost:5000/api/users")
       .then(res => res.json())
       .then(users =>
         this.setState({ users }, () => console.log("Users fetched...", users))
