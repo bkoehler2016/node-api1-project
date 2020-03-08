@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { Container, Row, Col } from "reactstrap";
+import "./Users.css";
 class Users extends Component {
   constructor() {
     super();
@@ -18,16 +19,16 @@ class Users extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Users</h2>
-        <ul>
+      <Container>
+        <Row>
           {this.state.users.map(user => (
-            <li key={user.id}>
-              {user.name} {user.bio}
-            </li>
+            <Col xs="6" key={user.id}>
+              <Row>{user.name}</Row>
+              <Row>{user.bio}</Row>
+            </Col>
           ))}
-        </ul>
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
