@@ -5,25 +5,25 @@ const cors = require("cors");
 
 server.use(express.json());
 server.use(cors());
-server.get("/", (req, response) => {
-  response.json({ hello: "Success" });
+server.get("/", (req, res) => {
+  res.json({ hello: "Success" });
 });
 
 // POST request to /api/users
-server.post("/api/users", (req, response) => {
+server.post("/api/users", (req, res) => {
   const userInfo = req.body;
   if (!userInfo.name || !userInfo.bio) {
-    response
+    res
       .status(400)
       .json({ errorMessage: "Please provide name and bio for the user." });
   } else {
     Users.insert(userInfo)
       .then(user => {
-        response.status(201).json(user);
+        res.status(201).json(user);
       })
       .catch(error => {
         console.log(error);
-        response.status(500).json({
+        res.status(500).json({
           errorMessage:
             "There was an error while saving the user to the database"
         });
@@ -32,84 +32,80 @@ server.post("/api/users", (req, response) => {
 });
 
 // GET request to /api/users
-server.get("/api/users", (req, response) => {
+server.get("/api/users", (req, res) => {
   Users.find()
     .then(users => {
-      response.status(200).json(users);
+      res.status(200).json(users);
     })
     .catch(error => {
       console.log("Error: ", error);
-      response.status(500).json({
+      res.status(500).json({
         errorMessage: "The users information could not be retrieved."
       });
     });
 });
 
 // GET request to /api/users:id
-server.get("/api/users/:id", (req, response) => {
+server.get("/api/users/:id", (req, res) => {
   const { id } = req.params;
   Users.findById(id)
     .then(user => {
       if (!user) {
-        response
+        res
           .status(404)
           .json({ message: "The user with the specified ID does not exist." });
       } else {
-        response.status(200).json(user);
+        res.status(200).json(user);
       }
     })
     .catch(err => {
       console.log(err);
-      response
+      res
         .status(500)
         .json({ errorMessage: "The user information could not be retrieved." });
     });
 });
 
 // DELETE request to /api/users:id
-server.delete("/api/users/:id", (req, response) => {
+server.delete("/api/users/:id", (req, res) => {
   const { id } = req.params;
   Users.remove(id)
     .then(user => {
       if (!user) {
-        response
+        res
           .status(404)
           .json({ message: "The user with the specified ID does not exist." });
       } else {
-        response.status(200).json(user);
+        res.status(200).json(user);
       }
     })
     .catch(error => {
       console.log("Error: ", error);
-      response
-        .status(500)
-        .json({ errorMessage: "The user could not be removed" });
+      res.status(500).json({ errorMessage: "The user could not be removed" });
     });
 });
 
 // PUT request to /api/users/:id
-server.put("/api/users/:id", (req, response) => {
+server.put("/api/users/:id", (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   Users.update(id, updates)
     .then(user => {
       if (!user) {
-        response.status(404).json({
+        res.status(404).json({
           errorMessage: "The user with the specified ID does not exist."
         });
       } else if (!updates.name || !updates.bio) {
-        response
+        res
           .status(400)
           .json({ errorMessage: "Please provide name and bio for the user." });
       } else {
-        response.status(200).json(user);
+        res.status(200).json(user);
       }
     })
     .catch(error => {
       console.log("Error: ", error);
-      response
-        .status(500)
-        .json({ errorMessage: "The user could not be updated" });
+      res.status(500).json({ errorMessage: "The user could not be updated" });
     });
 });
 const port = 5000;
