@@ -86,7 +86,7 @@ server.delete("/api/users/:id", (req, res) => {
 });
 
 // PUT request to /api/users/:id
-server.put("/api/users/:id", (req, res) => {
+server.patch("/api/users/:id", (req, res) => {
   const { id } = req.params;
   const updates = req.body;
   Users.update(id, updates)
