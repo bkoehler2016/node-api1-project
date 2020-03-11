@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Button } from "reactstrap";
 
 export default function UserForm() {
   const [newUser, SetNewUser] = useState({});
@@ -32,7 +33,9 @@ export default function UserForm() {
         placeholder="Bio"
         onChange={handleChange}
       />
-      <button type="submit">Add New User</button>
+      <Button color="primary" type="submit">
+        Add New User
+      </Button>
     </form>
   );
 }
