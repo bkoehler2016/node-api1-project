@@ -1,16 +1,38 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
+import axios from "axios";
 
-class UsersForm extends Component {
-  constructor(props) {
-    super(props);
-  }
+export default function UserForm() {
+  const [newUser, SetNewUser] = useState({});
 
-  render() {
-    return <div></div>;
-  }
+  const handleChange = event => {
+    SetNewUser({ ...newUser, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = () => {
+    axios.post("http://localhost:5000/api/users", newUser).then(res => {
+      console.log(res);
+    });
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="form">
+      <input
+        type="text"
+        name="name"
+        id="name"
+        value={newUser.name}
+        placeholder="Name"
+        onChange={handleChange}
+      />
+      <input
+        type="text"
+        name="bio"
+        id="bio"
+        value={newUser.bio}
+        placeholder="Bio"
+        onChange={handleChange}
+      />
+      <button type="submit">Add New User</button>
+    </form>
+  );
 }
-
-UsersForm.propTypes = {};
-
-export default UsersForm;
