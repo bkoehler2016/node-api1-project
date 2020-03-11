@@ -4,31 +4,9 @@ const server = express();
 const cors = require("cors");
 
 server.use(express.json());
-// server.use(cors());
+server.use(cors());
 server.get("/", (req, res) => {
   res.json({ hello: "Success" });
-});
-
-// POST request to /api/users
-server.post("/api/users", (req, res) => {
-  const userInfo = req.body;
-  if (!userInfo.name || !userInfo.bio) {
-    res
-      .status(400)
-      .json({ errorMessage: "Please provide name and bio for the user." });
-  } else {
-    Users.insert(userInfo)
-      .then(user => {
-        res.status(201).json(user);
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(500).json({
-          errorMessage:
-            "There was an error while saving the user to the database"
-        });
-      });
-  }
 });
 
 // GET request to /api/users
@@ -64,6 +42,28 @@ server.get("/api/users/:id", (req, res) => {
         .status(500)
         .json({ errorMessage: "The user information could not be retrieved." });
     });
+});
+
+// POST request to /api/users
+server.post("/api/users", (req, res) => {
+  const userInfo = req.body;
+  if (!userInfo.name || !userInfo.bio) {
+    res
+      .status(400)
+      .json({ errorMessage: "Please provide name and bio for the user." });
+  } else {
+    Users.insert(userInfo)
+      .then(user => {
+        res.status(201).json(user);
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({
+          errorMessage:
+            "There was an error while saving the user to the database"
+        });
+      });
+  }
 });
 
 // DELETE request to /api/users:id
