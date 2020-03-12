@@ -6,7 +6,7 @@ import UserForm from "./components/UsersForm";
 function App() {
   return (
     <div className="App">
-      <h2>Lord of the Rings Characthers.</h2>
+      <h2>Lord of the Rings Characters.</h2>
       <Users />
       <br></br>
       <UserForm />

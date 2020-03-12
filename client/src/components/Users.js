@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button } from "reactstrap";
+import axios from "axios";
 import "./Users.css";
 
 class Users extends Component {
@@ -24,8 +25,13 @@ class Users extends Component {
         <Row>
           {this.state.users.map(user => (
             <Col xs="6" key={user.id}>
-              <Row>{user.name}</Row>
-              <Row>{user.bio}</Row>
+              <Row className="name">Name: {user.name}</Row>
+              <Row>Bio: {user.bio}</Row>
+              {/* <Row>
+                <Button>Edit</Button>
+
+                <Button color="danger">Delete</Button>
+              </Row> */}
             </Col>
           ))}
         </Row>
