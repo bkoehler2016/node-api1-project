@@ -9,7 +9,7 @@ function App() {
       <h2>Lord of the Rings Characters.</h2>
       <Users />
       <br></br>
-      <UserForm />
+      {/* <UserForm /> */}
     </div>
   );
 }
