@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const Users = require("./data/db.js");
 const server = express();
@@ -109,7 +110,7 @@ server.patch("/api/users/:id", (req, res) => {
       res.status(500).json({ errorMessage: "The user could not be updated" });
     });
 });
-const port = 5000;
+const port = process.env.PORT;
 server.listen(port, () =>
   console.log(` Server started on http://localhost:${port} `)
 );

@@ -4,6 +4,7 @@
   "description": "Node API 1 Project Starter Code",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "server": "nodemon index.js"
   },
   "repository": {
@@ -22,6 +23,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "knex": "^0.20.7",
     "sqlite3": "^4.1.1"
