@@ -12,7 +12,7 @@ class Users extends Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:5000/api/users")
+    fetch("https://bk2016node-api1.herokuapp.com/api/users")
       .then(res => res.json())
       .then(users =>
         this.setState({ users }, () => console.log("Users fetched...", users))
