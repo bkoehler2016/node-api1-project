@@ -10,9 +10,11 @@ export default function UserForm() {
   };
 
   const handleSubmit = () => {
-    axios.post("http://localhost:5000/api/users", newUser).then(res => {
-      console.log(res);
-    });
+    axios
+      .post("https://bk2016node-api1.herokuapp.com/api/users", newUser)
+      .then(res => {
+        console.log(res);
+      });
   };
 
   return (
